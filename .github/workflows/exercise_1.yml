@@ -1,1 +1,11 @@
-../../content/exercise_1/exercise_1.yml
+name: Conditional Workflow
+
+on: push
+
+jobs:
+  build:
+    runs-on: self-hosted
+    if: "contains(github.event.head_commit.message, '[run ex1]')"
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Running CI because commit message demands it!"
