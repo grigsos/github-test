@@ -1,6 +1,6 @@
 FROM gitpod/workspace-python-3.12
 
-USER gitpod
+USER root
 
 # Install necessary tools
 RUN sudo apt-get update && \
