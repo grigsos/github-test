@@ -1,1 +1,4 @@
 reminders.md
+.gitpod/
+.pyenv_mirror/
+.vscode-remote/
