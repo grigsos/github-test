@@ -1,5 +1,7 @@
 FROM gitpod/workspace-python-3.12
 
+ENV TRIGGER_REBUILD 0
+
 USER root
 
 # Install necessary tools
