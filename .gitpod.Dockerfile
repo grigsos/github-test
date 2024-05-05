@@ -12,6 +12,8 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo apt-get update && \
     sudo apt-get install -y docker-ce
 
+COPY --chown=gitpod content/ /home/gitpod/cicd-exercises
+
 # Add Gitpod user to the Docker group
 RUN sudo usermod -aG docker gitpod
 
