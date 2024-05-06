@@ -1,11 +1,18 @@
-name: Conditional Workflow
+name: Build and Deploy to Minikube
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: self-hosted
-    if: "contains(github.event.head_commit.message, 'run ex1')"
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "Running CI ssfjlskjfbecause commit message demands it!"
+    - uses: actions/checkout@v4
+    - name: Build and Push Docker image
+      run: |
+        eval $(minikube -p minikube docker-env)
+        docker build -t my-python-app .
+        kubectl create deployment my-python-app --image=my-python-app
+        kubectl expose deployment my-python-app --type=LoadBalancer --port=8080
