@@ -1,0 +1,24 @@
+name: Stress Test Workflow
+
+on: push
+
+jobs:
+  stress-test:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install stress-ng
+      run: sudo apt-get update && sudo apt-get install -y stress-ng
+
+    - name: Run stress-ng
+      run: |
+        echo "Starting stress test"
+        stress-ng --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 300s --metrics-brief
+
+    - name: Print CPU and memory usage
+      run: |
+        echo "CPU and memory usage during the stress test"
+        top -bn1 | head -20
